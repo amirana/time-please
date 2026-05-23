@@ -1,16 +1,39 @@
-# React + Vite
+# Time Please
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A stopwatch and countdown timer app built with React and Vite.
 
-Currently, two official plugins are available:
+## Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[Live Demo](https://time-please.amirana.me)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Stopwatch with start, pause, and reset controls
+- Countdown timer with custom time input (hours, minutes, seconds)
+- Tab switching between stopwatch and timer
+- "Time's Up!" notification when the countdown ends
+- Clean and responsive UI
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Vite
+- CSS
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js v18+
+- pnpm
+
+### Installation
+
+```bash
+git clone https://github.com/amirana/time-please
+cd time-please
+pnpm install
+pnpm run dev
+```
+
+Open `http://localhost:5173` in your browser.

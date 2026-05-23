@@ -17,6 +17,7 @@ function App() {
   const [timerSeconds, setTimerSeconds] = useState(0);
   const [timerIsRunning, setTimerIsRunning] = useState(false);
   const [timeIsUp, setTimeIsUp] = useState(false);
+  const [timerStarted, setTimerStarted] = useState(false)
 
   // Stopwatch useEffect
   useEffect(() => {
@@ -83,6 +84,7 @@ function App() {
 
   function startTimer() {
     setTimerIsRunning(true);
+    setTimerStarted(true)
   }
 
   function pauseTimer() {
@@ -95,6 +97,7 @@ function App() {
     setTimerMinutes(0);
     setTimerSeconds(0);
     setTimeIsUp(false);
+    setTimerStarted(false)
   }
 
   return (
@@ -165,7 +168,7 @@ function App() {
           {activeTab === "timer" && (
             <div id="timer" className="content-panel">
               <div className="timer-content">
-                {timeIsUp && <p className="time-up-message">Time's Up! ⏰</p>}
+                {timeIsUp && timerStarted && <p className="time-up-message">Time's Up! ⏰</p>}
 
                 <div className="display-section">
                   <p className="time-display">
@@ -190,6 +193,7 @@ function App() {
                     min="0"
                     max="23"
                     placeholder="HH"
+                    value={timerHours || ''}
                     onChange={(e) => setTimerHours(Number(e.target.value))}
                   />
                   <input
@@ -199,6 +203,7 @@ function App() {
                     min="0"
                     max="59"
                     placeholder="MM"
+                    value={timerMinutes || ''}
                     onChange={(e) => setTimerMinutes(Number(e.target.value))}
                   />
                   <input
@@ -208,6 +213,7 @@ function App() {
                     min="0"
                     max="59"
                     placeholder="SS"
+                    value={timerSeconds || ''}
                     onChange={(e) => setTimerSeconds(Number(e.target.value))}
                   />
                 </div>
