@@ -221,6 +221,7 @@ input {
   padding: 14px;
   border-radius: 20px;
   font-weight: 600;
+  margin-bottom: 30px;
   animation: pop 0.3s ease;
 }
 
