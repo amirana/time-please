@@ -194,6 +194,7 @@ function App() {
                     max="23"
                     placeholder="HH"
                     value={timerHours || ''}
+                    disabled={timerIsRunning}
                     onChange={(e) => setTimerHours(Number(e.target.value))}
                   />
                   <input
@@ -204,6 +205,7 @@ function App() {
                     max="59"
                     placeholder="MM"
                     value={timerMinutes || ''}
+                    disabled={timerIsRunning}
                     onChange={(e) => setTimerMinutes(Number(e.target.value))}
                   />
                   <input
@@ -214,6 +216,7 @@ function App() {
                     max="59"
                     placeholder="SS"
                     value={timerSeconds || ''}
+                    disabled={timerIsRunning}
                     onChange={(e) => setTimerSeconds(Number(e.target.value))}
                   />
                 </div>
