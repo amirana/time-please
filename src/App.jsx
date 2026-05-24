@@ -17,7 +17,11 @@ function App() {
   const [timerSeconds, setTimerSeconds] = useState(0);
   const [timerIsRunning, setTimerIsRunning] = useState(false);
   const [timeIsUp, setTimeIsUp] = useState(false);
-  const [timerStarted, setTimerStarted] = useState(false)
+  const [timerStarted, setTimerStarted] = useState(false);
+  const [inputHours, setInputHours] = useState(0);
+  const [inputMinutes, setInputMinutes] = useState(0);
+  const [inputSeconds, setInputSeconds] = useState(0);
+  const [resetKey, setResetKey] = useState(0);
 
   // Stopwatch useEffect
   useEffect(() => {
@@ -62,7 +66,8 @@ function App() {
         if (timerSeconds === 0 && timerMinutes === 0 && timerHours === 0) {
           setTimerIsRunning(false);
           setTimeIsUp(true);
-          return
+          setResetKey((prev) => prev + 1);
+          return;
         }
 
         if (timerSeconds === 0) {
@@ -83,8 +88,12 @@ function App() {
   }, [timerIsRunning, timerSeconds, timerMinutes, timerHours]);
 
   function startTimer() {
+    setTimerHours(inputHours);
+    setTimerMinutes(inputMinutes);
+    setTimerSeconds(inputSeconds);
     setTimerIsRunning(true);
-    setTimerStarted(true)
+    setTimerStarted(true);
+    setTimeIsUp(false);
   }
 
   function pauseTimer() {
@@ -97,7 +106,8 @@ function App() {
     setTimerMinutes(0);
     setTimerSeconds(0);
     setTimeIsUp(false);
-    setTimerStarted(false)
+    setTimerStarted(false);
+    setResetKey((prev) => prev + 1);
   }
 
   return (
@@ -168,7 +178,9 @@ function App() {
           {activeTab === "timer" && (
             <div id="timer" className="content-panel">
               <div className="timer-content">
-                {timeIsUp && timerStarted && <p className="time-up-message">Time's Up! ⏰</p>}
+                {timeIsUp && timerStarted && (
+                  <p className="time-up-message">Time's Up! ⏰</p>
+                )}
 
                 <div className="display-section">
                   <p className="time-display">
@@ -185,7 +197,7 @@ function App() {
                     </span>
                   </p>
                 </div>
-                <div className="inputs-group">
+                <div className="inputs-group" key={resetKey}>
                   <input
                     className="time-input"
                     type="number"
@@ -193,9 +205,7 @@ function App() {
                     min="0"
                     max="23"
                     placeholder="HH"
-                    value={timerHours || ''}
-                    disabled={timerIsRunning}
-                    onChange={(e) => setTimerHours(Number(e.target.value))}
+                    onChange={(e) => setInputHours(Number(e.target.value))}
                   />
                   <input
                     className="time-input"
@@ -204,9 +214,7 @@ function App() {
                     min="0"
                     max="59"
                     placeholder="MM"
-                    value={timerMinutes || ''}
-                    disabled={timerIsRunning}
-                    onChange={(e) => setTimerMinutes(Number(e.target.value))}
+                    onChange={(e) => setInputMinutes(Number(e.target.value))}
                   />
                   <input
                     className="time-input"
@@ -215,31 +223,17 @@ function App() {
                     min="0"
                     max="59"
                     placeholder="SS"
-                    value={timerSeconds || ''}
-                    disabled={timerIsRunning}
-                    onChange={(e) => setTimerSeconds(Number(e.target.value))}
+                    onChange={(e) => setInputSeconds(Number(e.target.value))}
                   />
                 </div>
                 <div className="controls-group">
-                  <button
-                    className="btn btn-primary"
-                    type="submit"
-                    onClick={startTimer}
-                  >
+                  <button className="btn btn-primary" onClick={startTimer}>
                     Start
                   </button>
-                  <button
-                    className="btn btn-secondary"
-                    type="submit"
-                    onClick={pauseTimer}
-                  >
+                  <button className="btn btn-secondary" onClick={pauseTimer}>
                     Pause
                   </button>
-                  <button
-                    className="btn btn-tertiary"
-                    type="submit"
-                    onClick={resetTimer}
-                  >
+                  <button className="btn btn-tertiary" onClick={resetTimer}>
                     Reset
                   </button>
                 </div>
